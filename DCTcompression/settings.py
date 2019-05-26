@@ -26,7 +26,9 @@ SECRET_KEY = 'w-jyma^c5@ivhwn(^w+s70!f$d^e9l9059#-br3w@tiwah)_7n'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'dct-image-compression.herokuapp.com'
+    'dct-image-compression.herokuapp.com',
+    '127.0.0.1',
+    'localhost',
 ]
 
 
