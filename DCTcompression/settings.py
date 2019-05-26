@@ -25,7 +25,9 @@ SECRET_KEY = 'w-jyma^c5@ivhwn(^w+s70!f$d^e9l9059#-br3w@tiwah)_7n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'dct-image-compression.herokuapp.com'
+]
 
 
 # Application definition
