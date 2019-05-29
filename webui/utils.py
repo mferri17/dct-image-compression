@@ -12,14 +12,14 @@ def compress_image(user, image, F, d):
 
     # paths
     imagename = randomString(10)
-    image_folder = f'media/{user}/{imagename}'
+    image_folder = os.path.join('media', user, imagename)
 
     if not os.path.exists(image_folder):
         os.makedirs(image_folder)
 
-    image_path = f'{image_folder}/1-original.jpg'
-    image_grey_path = f'{image_folder}/2-gray.jpg'
-    image_compress_path = f'{image_folder}/3-grey-compress-F{F}_d{d}.jpg'
+    image_path = os.path.join(image_folder, '1-original.jpg')
+    image_grey_path = os.path.join(image_folder, '2-gray.jpg')
+    image_compress_path = os.path.join(image_folder, '3-grey-compress-F{F}_d{d}.jpg')
 
     # input image
     img = imageio.imread(image)
