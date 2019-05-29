@@ -2,8 +2,8 @@
 import os
 import random
 import string
-import imageio
 from datetime import datetime
+import imageio
 import numpy as np
 from scipy.fftpack import dctn, idctn
 

@@ -3,3 +3,5 @@ gunicorn
 django-heroku
 requests
 imageio
+numpy
+scipy
