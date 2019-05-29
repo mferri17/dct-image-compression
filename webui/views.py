@@ -35,7 +35,7 @@ def compress(request):
 
 def get_user_images(request):
     user = request.GET['user']
-    userpath = f'media\{user}'
+    userpath = os.path.join('media', user)
 
     images = []
 
