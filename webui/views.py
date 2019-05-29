@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.http import JsonResponse
 
 import os
+import shutil
 import webui.utils as utils
 
 # Create your views here.
@@ -33,16 +34,31 @@ def compress(request):
         return redirect('index')
 
 
+
+
+
 def get_user_images(request):
     user = request.GET['user']
     userpath = os.path.join('media', user)
+    image_paths = []
 
-    images = []
+    if os.path.exists(userpath):
+        for directory in os.listdir(userpath):
+            for root, dirs, files in os.walk(os.path.join(userpath, directory)):
+                original_image_path = utils.get_first_matching_image(root, files, 'original')
+                grey_image_path = utils.get_first_matching_image(root, files, 'grey')
+                compress_image_path = utils.get_first_matching_image(root, files, 'compress')
 
-    for directory in os.listdir(userpath):
-        for root, dirs, files in os.walk(os.path.join(userpath, directory)):
-            for filename in files:
-                imagepath = '/' + os.path.join(root, filename).replace('\\', '/')
-                images.append(imagepath)
+                image_paths.append(utils.ImageDTO(directory, original_image_path, grey_image_path, compress_image_path).__dict__)
+                # for filename in files:
+                #     imagepath = '/' + os.path.join(root, filename).replace('\\', '/')
 
-    return JsonResponse({'images': images})
+    return JsonResponse({'images': image_paths})
+
+
+def delete_image(request, user, image):
+    imagefolder = os.path.join('media', user, image)
+    if os.path.exists(imagefolder):
+        shutil.rmtree(imagefolder)
+
+    return redirect('index')

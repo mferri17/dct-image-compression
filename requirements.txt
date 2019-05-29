@@ -1,3 +1,9 @@
+os
+shutil
+re
+datetime
+string
+random
 django
 gunicorn
 django-heroku

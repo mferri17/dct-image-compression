@@ -8,4 +8,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('compress', views.compress, name='compress'),
     path('get_user_images', views.get_user_images, name='get_user_images'),
+    path('delete_image/<slug:user>/<slug:image>', views.delete_image, name='delete_image'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

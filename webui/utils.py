@@ -1,11 +1,29 @@
 
 import os
+import re
 import random
 import string
 from datetime import datetime
 import imageio
 import numpy as np
 from scipy.fftpack import dctn, idctn
+
+
+class ImageDTO:
+  def __init__(self, name, original, grey, compress):
+    self.name = name
+    self.original = original
+    self.grey = grey
+    self.compress = compress
+
+
+def get_first_matching_image(root, files, term):
+    result = ''
+    original_regex = re.compile(f".*{term}.*")
+    matches = list(filter(original_regex.match, files))
+    if(len(matches) > 0):
+        result = os.path.join(root, matches[0]).replace('\\', '/')
+    return result
 
 
 def compress_image(user, image, F, d):
@@ -18,8 +36,8 @@ def compress_image(user, image, F, d):
         os.makedirs(image_folder)
 
     image_path = os.path.join(image_folder, '1-original.jpg')
-    image_grey_path = os.path.join(image_folder, '2-gray.jpg')
-    image_compress_path = os.path.join(image_folder, '3-grey-compress-F{F}_d{d}.jpg')
+    image_grey_path = os.path.join(image_folder, '2-grey.jpg')
+    image_compress_path = os.path.join(image_folder, f'3-compress-F{F}_d{d}.jpg')
 
     # input image
     img = imageio.imread(image)
@@ -70,3 +88,4 @@ def compress_image(user, image, F, d):
 def randomString(stringLength=10):
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(stringLength))
+
