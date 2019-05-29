@@ -1,4 +1,3 @@
-shutil
 django
 gunicorn
 django-heroku
