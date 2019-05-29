@@ -10,11 +10,11 @@ from scipy.fftpack import dctn, idctn
 
 
 class ImageDTO:
-  def __init__(self, name, original, grey, compress):
-    self.name = name
-    self.original = original
-    self.grey = grey
-    self.compress = compress
+    def __init__(self, name, original, grey, compress):
+        self.name = name
+        self.original = original
+        self.grey = grey
+        self.compress = compress
 
 
 def get_first_matching_image(root, files, term):
@@ -37,11 +37,17 @@ def compress_image(user, image, F, d):
 
     image_path = os.path.join(image_folder, '1-original.jpg')
     image_grey_path = os.path.join(image_folder, '2-grey.jpg')
-    image_compress_path = os.path.join(image_folder, f'3-compress-F{F}_d{d}.jpg')
+    image_compress_path = os.path.join(
+        image_folder, f'3-compress-F{F}_d{d}.jpg')
 
     # input image
     img = imageio.imread(image)
-    bnimg = img[:, :, 0]
+    print(img.ndim)
+    if img.ndim == 3: # colored images
+        bnimg = img[:, :, 0]
+    else: # grey images
+        bnimg = img
+
     imageio.imwrite(image_path, img)  # original image
     imageio.imwrite(image_grey_path, bnimg)  # black & white image
 
@@ -80,7 +86,6 @@ def compress_image(user, image, F, d):
 
             bnimg[rowsLower:rowsUpper, colsLower:colsUpper] = ff
 
-
     imageio.imwrite(image_compress_path, bnimg)  # compress image
     # return image_path, image_compress_path
 
@@ -88,4 +93,3 @@ def compress_image(user, image, F, d):
 def randomString(stringLength=10):
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(stringLength))
-

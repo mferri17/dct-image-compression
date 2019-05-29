@@ -52,13 +52,16 @@
 </style>
 
 <div class="col-md-4" style="margin:30px 0 150px 0;">
-    <h3>Your images <a href="#">prova</a></h3>
-    
+    <h3>
+        Your images
+        <a id="delete-all" class="btn btn-sm btn-danger" role="button" href="#"
+            onclick="return confirm('Are you sure?');">Delete all</a>
+    </h3>
     <table id="user-images" class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>Originale</th>
-                <th>Scala di grigi</th>
+                <th style="white-space:nowrap;">Scala di grigi</th>
                 <th>Compressa</th>
                 <th></th>
             </tr>
@@ -66,6 +69,7 @@
         <tbody>
         </tbody>
     </table>
+    <i>Click an image to see it bigger</i>
 </div>
 
 
@@ -73,6 +77,7 @@
     $(document).ready(function () {
         var user = setUser();
         getUserImages(user);
+        $('#delete-all').attr('href', '/delete_all_for_user/' + user);
     });
 
     function setUser() {
@@ -95,9 +100,9 @@
             })
             .done(function (response) {
                 $(response.images).each(function (index, element) {
-                    var original = '<td><img src="' + element.original + '"></td>';
-                    var grey = '<td><img src="' + element.grey + '"></td>';
-                    var compress = '<td><img src="' + element.compress + '"></td>';
+                    var original = '<td><a href="' + element.original +'" target="_blank"><img src="' + element.original + '"><a/></td>';
+                    var grey = '<td><a href="' + element.grey +'" target="_blank"><img src="' + element.grey + '"><a/></td>';
+                    var compress = '<td><a href="' + element.compress +'" target="_blank"><img src="' + element.compress + '"><a/></td>';
                     var remove = '<td><a href="/delete_image/' + user + '/' + element.name +
                         '" class="fa fa-trash text-danger"></a></td>';
 

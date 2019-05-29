@@ -56,8 +56,17 @@ def get_user_images(request):
     return JsonResponse({'images': image_paths})
 
 
+
 def delete_image(request, user, image):
     imagefolder = os.path.join('media', user, image)
+    if os.path.exists(imagefolder):
+        shutil.rmtree(imagefolder)
+
+    return redirect('index')
+
+
+def delete_all_for_user(request, user):
+    imagefolder = os.path.join('media', user)
     if os.path.exists(imagefolder):
         shutil.rmtree(imagefolder)
 
