@@ -3,9 +3,89 @@
 
 {% block content %}
 
-<h2>Carica un'immagine</h2>
-<form>
-    
+
+<h2>Upload an image to compress</h2>
+<hr>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+<form action="{% url 'compress' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="col-md-6">
+        <input type="hidden" name="user" />
+        <div class="form-group row">
+            <div class="col">
+                <label for="image">Choose image</label>
+                <input type="file" class="form-control-file" name="image" id="image" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <input type="text" class="form-control" name="F" placeholder="F = blocks size" required />
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="d" placeholder="d = frequency treshold" required />
+            </div>
+        </div>
+        <input type="submit" value="Submit" />
+    </div>
+    <br/>
+    <hr>
 </form>
+
+<div class="col-md-4" style="margin-top:30px;">
+    <h3>Your images</h3>
+    <table id="user-images" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Originale</th>
+                <th>Compressa</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        var user = setUser();
+        getUserImages(user);
+    });
+
+    function setUser() {
+        var user = window.localStorage.getItem('user');
+        if (!user) {
+            user = randomString();
+            window.localStorage.setItem('user', user);
+        }
+        $('[name=user]').val(user);
+        return user;
+    }
+
+    function getUserImages(user) {
+        $.ajax({
+                method: "GET",
+                url: "/get_user_images",
+                data: {
+                    user: user,
+                }
+            })
+            .done(function (response) {
+                $(response.images).each(function (index, element) {
+                    var original = '<td><img src="' + element + '" height="250"></td>';
+                    var tr = $('<tr>').append(original).append('<td>');//.append(compress);
+                    $('#user-images tbody').append(tr);
+                });
+            });
+    }
+
+    function randomString() {
+        // https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+        return Math.random().toString(36).substring(7);
+    }
+</script>
 
 {% endblock %}
