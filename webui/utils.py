@@ -37,14 +37,16 @@ def compress_image(user, image, F, d):
 
     image_path = os.path.join(image_folder, '1-original.jpg')
     image_grey_path = os.path.join(image_folder, '2-grey.jpg')
-    image_compress_path = os.path.join(image_folder, f'3-compress-F{F}_d{d}.jpg')
+    image_compress_path = os.path.join(
+        image_folder, f'3-compress-F{F}_d{d}.jpg')
 
     # input image
     img = imageio.imread(image)
     print(img.ndim)
-    if img.ndim == 3: # colored images
-        bnimg = img[:, :, 0]
-    else: # grey images
+    if img.ndim == 3:  # colored images
+        # bnimg = img[:, :, 0]
+        bnimg = 0.2989 * img[:, :, 0] + 0.5870 * img[:, :, 1] + 0.1140 * img[:, :, 2] # RGB to grey
+    else:  # grey images
         bnimg = img
 
     imageio.imwrite(image_path, img)  # original image
