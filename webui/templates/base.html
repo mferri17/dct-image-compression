@@ -27,7 +27,7 @@
 
     <!-- Menu -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">DCT Image compression</a>
+        <a class="navbar-brand" href="/">DCT Image compression</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -35,16 +35,16 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a href="https://github.com/mferri17/dct-image-compression" target="_blank" class="nav-link">
+                        <span class="fab fa-github"></span>
+                        Code Repository
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="https://devcenter.heroku.com" target="_blank" class="nav-link">
                         <span class="fa fa-book"></span>
@@ -59,6 +59,11 @@
     <!-- Content -->
     <div class="container" style="margin-top: 30px;">
         {% block content %}{% endblock %}
+
+        <footer style="margin-bottom: 30px;">
+            <hr>
+            Marco Ferri (807130) - Nassim Habbash (808292) / <a href="https://github.com/mferri17/dct-image-compression" target="_blank">View source code</a>
+        </footer>
     </div>
 
 </body>

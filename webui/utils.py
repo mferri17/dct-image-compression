@@ -37,8 +37,7 @@ def compress_image(user, image, F, d):
 
     image_path = os.path.join(image_folder, '1-original.jpg')
     image_grey_path = os.path.join(image_folder, '2-grey.jpg')
-    image_compress_path = os.path.join(
-        image_folder, f'3-compress-F{F}_d{d}.jpg')
+    image_compress_path = os.path.join(image_folder, f'3-compress-F{F}_d{d}.jpg')
 
     # input image
     img = imageio.imread(image)

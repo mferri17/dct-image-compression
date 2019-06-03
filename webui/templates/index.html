@@ -12,23 +12,23 @@
 
 <!-- ---------------------- UPLOAD FORM ---------------------- -->
 
-<form action="{% url 'compress' %}" method="post" enctype="multipart/form-data">
+<form id="upload" class="row" action="{% url 'compress' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-md-6">
         <input type="hidden" name="user" />
         <div class="form-group row">
             <div class="col">
                 <label for="image">Choose image</label>
-                <input type="file" class="form-control form-control-file" accept="image/jpg, image/jpeg, image/bmp"
+                <input type="file" class="form-control form-control-file" accept="image/jpg, image/jpeg, .bmp"
                     name="image" id="image" required style="padding-bottom: 36px;" />
             </div>
         </div>
         <div class="form-group row">
             <div class="col">
-                <input type="text" class="form-control" name="F" placeholder="F = blocks size" required />
+                <input type="number" class="form-control" name="F" placeholder="F = blocks size" required />
             </div>
             <div class="col">
-                <input type="text" class="form-control" name="d" placeholder="d = frequency treshold" required />
+                <input type="number" class="form-control" name="d" placeholder="d = frequency treshold" required />
             </div>
         </div>
         <input class="btn btn-primary" type="submit" value="Submit" />
@@ -60,9 +60,9 @@
     <table id="user-images" class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Originale</th>
-                <th style="white-space:nowrap;">Scala di grigi</th>
-                <th>Compressa</th>
+                <th>Original</th>
+                <th style="white-space:nowrap;">Greyscale</th>
+                <th>Compress</th>
                 <th></th>
             </tr>
         </thead>
@@ -78,6 +78,15 @@
         var user = setUser();
         getUserImages(user);
         $('#delete-all').attr('href', '/delete_all_for_user/' + user);
+        $('form#upload').submit(function(event){
+            //event.preventDefault();
+            var F = $(event.target).find('[name=F]').val();
+            var d = $(event.target).find('[name=d]').val();
+            if(d < 0 || d > 2*F-2){
+                alert('Frequency treshold (d) must be between 0 and 2F-2');
+                return false;
+            }
+        });
     });
 
     function setUser() {
