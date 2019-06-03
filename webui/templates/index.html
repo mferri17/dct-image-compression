@@ -33,6 +33,9 @@
         </div>
         <input class="btn btn-primary" type="submit" value="Submit" />
     </div>
+    <div class="col-md-6">
+        <img id="loading" src="https://loading.io/spinners/cutiefox/lg.cutie-fox-spinner.gif" width="180" style="display:none;" />
+    </div>
     <br />
     <hr>
 </form>
@@ -78,13 +81,17 @@
         var user = setUser();
         getUserImages(user);
         $('#delete-all').attr('href', '/delete_all_for_user/' + user);
-        $('form#upload').submit(function(event){
+
+        $('form#upload').submit(function (event) {
             //event.preventDefault();
             var F = $(event.target).find('[name=F]').val();
             var d = $(event.target).find('[name=d]').val();
-            if(d < 0 || d > 2*F-2){
+            if (d < 0 || d > 2 * F - 2) {
                 alert('Frequency treshold (d) must be between 0 and 2F-2');
                 return false;
+            }
+            else{
+                $('#loading').show();
             }
         });
     });
@@ -109,9 +116,12 @@
             })
             .done(function (response) {
                 $(response.images).each(function (index, element) {
-                    var original = '<td><a href="' + element.original +'" target="_blank"><img src="' + element.original + '"><a/></td>';
-                    var grey = '<td><a href="' + element.grey +'" target="_blank"><img src="' + element.grey + '"><a/></td>';
-                    var compress = '<td><a href="' + element.compress +'" target="_blank"><img src="' + element.compress + '"><a/></td>';
+                    var original = '<td><a href="' + element.original + '" target="_blank"><img src="' +
+                        element.original + '"><a/></td>';
+                    var grey = '<td><a href="' + element.grey + '" target="_blank"><img src="' + element
+                        .grey + '"><a/></td>';
+                    var compress = '<td><a href="' + element.compress + '" target="_blank"><img src="' +
+                        element.compress + '"><a/></td>';
                     var remove = '<td><a href="/delete_image/' + user + '/' + element.name +
                         '" class="fa fa-trash text-danger"></a></td>';
 
