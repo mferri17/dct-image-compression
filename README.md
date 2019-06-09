@@ -12,7 +12,7 @@ As described in `docs/MCS_project-description.pdf`, this project is divided into
 
 Make sure you have Python 3.7 [installed locally](http://install.python-guide.org).
 
-```
+```console
 $ git clone https://github.com/mferri17/dct-image-compression
 $ cd dct-image-compression
 $ pip install -r requirements.txt
@@ -22,12 +22,12 @@ $ python manage.py runserver 9999
 
 If you prefer, you can also run the application using Heroku. First of all, you have to install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 After `pip install`, you can run the application locally with this command for Linux users:
-```
+```console
 $ heroku local
 ```
 
 Or this one for Windows users:
-```
+```console
 > heroku local web -f Procfile.windows
 ```
 
@@ -36,7 +36,7 @@ Your app should now be running on [localhost:9999](http://localhost:9999/). Usin
 
 ### Deploying to Heroku
 
-```sh
+```console
 $ heroku create
 $ git push heroku master
 $ heroku open
