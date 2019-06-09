@@ -8,7 +8,7 @@ As described in `docs/MCS_project-description.pdf`, this project is divided into
 - The second one is a **Web App that implements a simple JPEG-derived algorithm to demonstrate how DCT2 is used in image compressions**. The application has been deployed and it is available here: https://dct-image-compression.herokuapp.com/
 
 #
-## Getting Started (part 2)
+## Running locally (project part 2)
 
 Make sure you have Python 3.7 [installed locally](http://install.python-guide.org).
 
@@ -31,7 +31,7 @@ Or this one for Windows users:
 > heroku local web -f Procfile.windows
 ```
 
-Your app should now be running on [localhost:9999](http://localhost:9999/).
+Your app should now be running on [localhost:9999](http://localhost:9999/). Using the Web App, you a `media` folder should appear in the project root, that is where uploaded images are saved.
 
 
 ### Deploying to Heroku
@@ -50,7 +50,7 @@ For more information about using Python on Heroku, see [these articles](https://
 
 ## Folder Tree Structure
 
-In `docs` folder you can find **project description**, some **slide**s and **proposed images** to test the application.
+In `docs` folder you can find **project description**, some **slides** and **proposed images** to test the application.
 
 This is a **Django Web App**. Most relevant code that directly use DCT2 algorithm is placed into `webui/views.py` (the MVC controller that receives browser requests) and `webui/utils.py` (containing the algorithm described in project description).
 
