@@ -42,7 +42,7 @@ def compress_image(user, image, F, d):
 
     # input image
     img = imageio.imread(image)
-    print(img.ndim)
+    
     if img.ndim == 3:  # colored images
         # bnimg = img[:, :, 0]
         bnimg = 0.2989 * img[:, :, 0] + 0.5870 * img[:, :, 1] + 0.1140 * img[:, :, 2] # RGB to grey

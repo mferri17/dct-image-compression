@@ -52,7 +52,7 @@ For more information about using Python on Heroku, see [these articles](https://
 
 In `docs` folder you can find **project description**, some **slides** and **proposed images** to test the application.
 
-This is a **Django Web App**. Most relevant code that directly use DCT2 algorithm is placed into `webui/views.py` (the MVC controller that receives browser requests) and `webui/utils.py` (containing the algorithm described in project description).
+This is a **Django Web App**. Most relevant code that directly use DCT2 algorithm is placed into `webui/views.py` (the component that handle browser requests) and `webui/utils.py` (containing the algorithm described in the project description).
 
 Other files are needed for running a Django projects (see, for example, `webui/templates` for the Views and `webui/urls.py` for routing) and deploying it on Heroku (such as `app.json` and `Procfile`).
 
